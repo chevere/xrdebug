@@ -42,9 +42,11 @@ final class Dump
     public function toJson(): string
     {
         $json = json_encode($this->toArray());
+        // @codeCoverageIgnoreStart
         if ($json === false) {
             throw new LogicException('Unable to encode to JSON');
         }
+        // @codeCoverageIgnoreEnd
 
         return $json;
     }

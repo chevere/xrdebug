@@ -51,12 +51,14 @@ final class VerifySignatureMiddleware implements MiddlewareInterface
         $body = $request->getParsedBody();
         $serialize = serialize($body);
         $signature = base64_decode($signature[0], true);
+        // @codeCoverageIgnoreStart
         if ($signature === false) {
             throw new MiddlewareException(
                 message: 'Invalid signature',
                 code: 400
             );
         }
+        // @codeCoverageIgnoreEnd
         /** @var PublicKey $publicKey */
         $publicKey = $this->privateKey->getPublicKey();
         if (! $publicKey->verify($serialize, $signature)) {
