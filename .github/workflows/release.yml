@@ -55,18 +55,11 @@ jobs:
           ls micro
       - name: Cat micro
         run: ./cat.sh
-      - name: Create macOS package
+      - name: Build macOS tar
         run: |
-          pkgbuild --identifier org.chevere.xrdebug.pkg \
-            --install-location ./usr/local/bin/ \
-            --version ${{ github.ref_name}} \
-            --root ./bin/macos/arm64 \
-            xrdebug-macos-arm64.pkg
-          pkgbuild --identifier org.chevere.xrdebug.pkg \
-            --install-location ./usr/local/bin/ \
-            --version ${{ github.ref_name}} \
-            --root ./bin/macos/x86_64 \
-            xrdebug-macos-x86_64.pkg
+          tar -C bin/macos/arm64 -zcvf xrdebug-macos-arm64.tar.gz xrdebug
+          tar -C bin/linux/x86_64 -zcvf xrdebug-macos-x86_64.tar.gz xrdebug
+          ls .
       - name: Build Linux tar
         run: |
           tar -C bin/linux/aarch64 -zcvf xrdebug-linux-aarch64.tar.gz xrdebug
@@ -82,6 +75,6 @@ jobs:
             schwager.html,
             xrdebug.phar,
             xrdebug.phar.asc,
-            xrdebug-macos-*.pkg,
+            xrdebug-macos-*.tar.gz,
             xrdebug-linux-*.tar.gz
           token: ${{ secrets.GITHUB_TOKEN }}
