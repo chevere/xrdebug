@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Chevere.
+ * This file is part of xrDebug.
  *
  * (c) Rodolfo Berrios <rodolfo@chevere.org>
  *

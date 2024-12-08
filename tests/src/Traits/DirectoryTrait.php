@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Chevere.
+ * This file is part of xrDebug.
  *
  * (c) Rodolfo Berrios <rodolfo@chevere.org>
  *
@@ -17,7 +17,7 @@ use Chevere\Filesystem\File;
 use Chevere\Filesystem\Interfaces\DirectoryInterface;
 use Chevere\Filesystem\Interfaces\FileInterface;
 use function Chevere\Filesystem\directoryForPath;
-use function Safe\realpath;
+use function realpath;
 
 trait DirectoryTrait
 {

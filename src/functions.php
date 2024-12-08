@@ -33,9 +33,9 @@ use React\Http\Message\Response;
 use React\Stream\ThroughStream;
 use Relay\Relay;
 use Throwable;
+use function base64_decode;
 use function Chevere\Http\responseAttribute;
-use function Safe\base64_decode;
-use function Safe\json_encode;
+use function json_encode;
 
 function encrypt(SymmetricKey $symmetricKey, string $message, ?string $nonce = null): string
 {
@@ -54,6 +54,9 @@ function encrypt(SymmetricKey $symmetricKey, string $message, ?string $nonce = n
 function decrypt(SymmetricKey $symmetricKey, string $encodedCipherText): string
 {
     $decode = base64_decode($encodedCipherText, true);
+    if ($decode === false) {
+        throw new LogicException('Invalid base64 encoded cipher text');
+    }
     $nonce = mb_substr(
         $decode,
         0,
@@ -179,7 +182,7 @@ function getResponse(
             return new Response(
                 status: 400,
                 headers: $headers,
-                body: $error
+                body: strval($error)
             );
         }
     }
@@ -241,6 +244,9 @@ function getCipher(
         );
     } else {
         $symmetricKey = base64_decode($symmetricKey, true);
+        if ($symmetricKey === false) {
+            throw new LogicException('Invalid symmetric key');
+        }
     }
     $cipher = new AES('gcm');
     $cipher->setKey($symmetricKey);

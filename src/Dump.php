@@ -13,7 +13,8 @@ declare(strict_types=1);
 
 namespace Chevere\xrDebug;
 
-use function Safe\json_encode;
+use LogicException;
+use function json_encode;
 
 final class Dump
 {
@@ -40,6 +41,11 @@ final class Dump
 
     public function toJson(): string
     {
-        return json_encode($this->toArray());
+        $json = json_encode($this->toArray());
+        if ($json === false) {
+            throw new LogicException('Unable to encode to JSON');
+        }
+
+        return $json;
     }
 }

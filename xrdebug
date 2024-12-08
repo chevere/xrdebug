@@ -2,7 +2,7 @@
 <?php
 
 /*
- * This file is part of Chevere.
+ * This file is part of xrDebug.
  *
  * (c) Rodolfo Berrios <rodolfo@chevere.org>
  *
@@ -36,7 +36,7 @@ use function Chevere\Writer\writers;
 use function Chevere\xrDebug\getCipher;
 use function Chevere\xrDebug\getPrivateKey;
 use function Chevere\xrDebug\getResponse;
-use function Safe\exec;
+use function exec;
 
 require_once __DIR__ . '/loader.php';
 

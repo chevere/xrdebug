@@ -26,7 +26,7 @@ use Chevere\xrDebug\Constants\UrlPathRegex;
 use Chevere\xrDebug\Controllers\Traits\PauseTrait;
 use function Chevere\Parameter\arrayp;
 use function Chevere\Parameter\bool;
-use function Safe\json_encode;
+use function json_encode;
 
 #[Description('Update a pause to stop execution')]
 #[Response(
@@ -62,6 +62,7 @@ final class PausePatchController extends Controller
             'stop' => true,
         ];
         $json = json_encode($data);
+        $json = strval($json);
         $file->put($json);
 
         return $data;

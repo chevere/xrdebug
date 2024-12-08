@@ -22,7 +22,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use function Safe\base64_decode;
+use function base64_decode;
 
 #[Response(
     new Status(400)
@@ -50,7 +50,13 @@ final class VerifySignatureMiddleware implements MiddlewareInterface
         }
         $body = $request->getParsedBody();
         $serialize = serialize($body);
-        $signature = base64_decode($signature[0]);
+        $signature = base64_decode($signature[0], true);
+        if ($signature === false) {
+            throw new MiddlewareException(
+                message: 'Invalid signature',
+                code: 400
+            );
+        }
         /** @var PublicKey $publicKey */
         $publicKey = $this->privateKey->getPublicKey();
         if (! $publicKey->verify($serialize, $signature)) {

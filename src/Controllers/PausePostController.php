@@ -28,7 +28,7 @@ use Chevere\xrDebug\Debugger;
 use function Chevere\Parameter\arrayp;
 use function Chevere\Parameter\bool;
 use function Chevere\Parameter\string;
-use function Safe\json_encode;
+use function json_encode;
 
 #[Description('Create a pause')]
 #[Request(
@@ -78,6 +78,7 @@ final class PausePostController extends Controller
             'stop' => false,
         ];
         $encoded = json_encode($data);
+        $encoded = strval($encoded);
         $file->put($encoded);
         $this->debugger->sendPause(
             $this->body()->toArray(),
