@@ -77,7 +77,7 @@ if (array_key_exists('h', $options) || array_key_exists('help', $options)) {
           <cyan>-e</cyan> Enable end-to-end encryption
           <cyan>-k</cyan> <dark_gray>[for -e option]</dark_gray> Symmetric key
           <cyan>-s</cyan> Enable sign verification
-          <cyan>-x</cyan> <dark_gray>[for -x option]</dark_gray> Private key
+          <cyan>-x</cyan> <dark_gray>[for -s option]</dark_gray> Private key
 
         <yellow>Session options</yellow>
           <cyan>-n</cyan> Session name <red>(default xrDebug)</red>
