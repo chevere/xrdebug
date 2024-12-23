@@ -5,76 +5,37 @@ on:
       - "*"
 jobs:
   release:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     permissions:
       contents: write
-    env:
-      phpVer: "8.3"
-      tools: composer
-      ini-values: default_charset='UTF-8'
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+      - name: Set up Go
+        uses: actions/setup-go@v5
         with:
-          php-version: ${{ env.phpVer }}
-          ini-values: ${{ env.ini-values }}
-          tools: ${{ env.tools }}
-        env:
-          fail-fast: true
-      - name: Install dependencies
-        run: composer install --no-progress
-      - name: Get humbug/box
-        uses: robinraju/release-downloader@v1.8
-        with:
-          repository: "box-project/box"
-          latest: true
-          fileName: "box.phar"
-      - name: Compile xrdebug.phar
-        run: php box.phar compile
-      - name: Import GPG key
-        uses: crazy-max/ghaction-import-gpg@v5
-        with:
-          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-          passphrase: ${{ secrets.GPG_PASSPHRASE }}
-      - name: Sign xrdebug.phar
-        run: gpg -ab xrdebug.phar
-      - name: Download micro.sfx
-        uses: robinraju/release-downloader@v1.8
-        with:
-          repository: "xrdebug/xrdebug-micro"
-          out-file-path: "downloads"
-          fileName: "php-*.tar.gz"
-          latest: true
-          tarBall: true
-          extract: false
-      - name: Extract micro files
+          go-version: "1.23.4"
+      # - name: Import GPG key
+      #   uses: crazy-max/ghaction-import-gpg@v5
+      #   with:
+      #     gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+      #     passphrase: ${{ secrets.GPG_PASSPHRASE }}
+      # - name: Sign xrdebug.phar
+      #   run: gpg -ab xrdebug.phar
+      - name: Cross build
         run: |
-          for filename in downloads/php-*.tar.gz; do tar -xvf $filename; done
-          ls micro
-      - name: Cat micro
-        run: ./cat.sh
-      - name: Build macOS tar
+          make build--all
+      - name: Cross distribution
         run: |
-          tar -C bin/macos/arm64 -zcvf xrdebug-macos-arm64.tar.gz xrdebug
-          tar -C bin/linux/x86_64 -zcvf xrdebug-macos-x86_64.tar.gz xrdebug
-          ls .
-      - name: Build Linux tar
-        run: |
-          tar -C bin/linux/aarch64 -zcvf xrdebug-linux-aarch64.tar.gz xrdebug
-          tar -C bin/linux/x86_64 -zcvf xrdebug-linux-x86_64.tar.gz xrdebug
-          ls .
+          make dist--all
       - name: Upload artifacts
         uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
           omitBodyDuringUpdate: true
           artifacts: >
-            schwager.json,
-            schwager.html,
-            xrdebug.phar,
-            xrdebug.phar.asc,
+            xrdebug-windows-*.tar.gz,
             xrdebug-macos-*.tar.gz,
-            xrdebug-linux-*.tar.gz
+            xrdebug-linux-*.tar.gz,
+            xrdebug-freebsd-*.tar.gz
           token: ${{ secrets.GITHUB_TOKEN }}

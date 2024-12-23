@@ -1,19 +1,13 @@
-/.dockerignore export-ignore
-/.ecs export-ignore
 /.gitattributes export-ignore
 /.github export-ignore
 /.gitignore export-ignore
 /.vscode export-ignore
-/box.json.dist export-ignore
-/cat.sh export-ignore
-/docker-bake.hcl export-ignore
-/infection.json.dist export-ignore
-/phpstan.neon export-ignore
-/phpunit-coverage.xml export-ignore
-/phpunit.xml export-ignore
-/schwager.php export-ignore
-/sonar-project.properties export-ignore
-/tests export-ignore
+/readme_assets export-ignore
+/coverage export-ignore
+/dist export-ignore
 
-*.php diff=php
-schwager.html linguist-detectable=false
+*.go diff=go
+
+web/html2canvas.min.js linguist-detectable=false
+web/sjcl.js linguist-detectable=false
+web/fonts/* linguist-detectable=false

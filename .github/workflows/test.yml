@@ -1,48 +1,21 @@
 name: Test
-on: [push]
+on:
+  push:
+    tags:
+      - "*"
 jobs:
-  test:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        php: ["8.1", "8.2", "8.3"]
-    env:
-      tools: composer, phpstan, infection
-      ini-values: default_charset='UTF-8'
-    name: PHP ${{ matrix.php }} test on ${{ matrix.os }}
+  release:
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+      - name: Set up Go
+        uses: actions/setup-go@v5
         with:
-          php-version: ${{ matrix.php }}
-          ini-values: ${{ env.ini-values }}
-          coverage: pcov
-          tools: ${{ env.tools }}
-        env:
-          fail-fast: true
-      - name: Setup problem matchers for PHPUnit
-        run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
-      - name: Validate composer
-        run: composer validate
-      - name: Get composer cache directory
-        id: composer-cache
-        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-      - name: Cache dependencies
-        uses: actions/cache@v3
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-composer-
-      - name: Install dependencies
-        run: composer install --no-progress
-      - name: Run PHPStan
-        run: composer phpstan
-      - name: Tests (PHPUnit)
-        run: vendor/bin/phpunit --coverage-xml=build/logs/xml-coverage --log-junit=build/logs/junit.xml
-      - name: Mutation testing (Infection)
-        env:
-          INFECTION_BADGE_API_KEY: ${{ secrets.INFECTION_BADGE_API_KEY }}
-        run: infection --coverage=build/logs --min-covered-msi=90 --threads=$(nproc) --logger-github --only-covered
+          go-version: "1.23.4"
+      - name: Deps
+        run: |
+          make dev-deps
+      - name: Tests
+        run: |
+          make test-coverage

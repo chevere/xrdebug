@@ -1,76 +1,214 @@
 # xrDebug
 
-<a href="https://xrdebug.com"><img alt="xrDebug" src="app/src/icon.svg" width="40%"></a>
+[xrDebug](https://xrdebug.com/) is a lightweight web-based debug server. [Play video](https://xrdebug.com/xrdebug.mp4)
 
-<a href="https://github.com/xrdebug/xrdebug/releases/latest"><img alt="Get it on macOS" src=".github/badge/macos.png" height="50" hspace="2"><img alt="Get it on Linux" src=".github/badge/linux.png" height="50" hspace="2"><img alt="Get it on Windows" src=".github/badge/windows.png" height="50" hspace="2"></a>
+<a href="https://github.com/xrdebug/xrdebug/releases/latest"><img alt="Get it on macOS" src="readme_assets/badge/macos.png" height="50" hspace="2"><img alt="Get it on Linux" src="readme_assets/badge/linux.png" height="50" hspace="2"><img alt="Get it on Windows" src="readme_assets/badge/windows.png" height="50" hspace="2"></a>
+
+<a href="https://xrdebug.com"><img alt="xrDebug" src="web/icon.svg" width="40%"></a>
 
 [![Build](https://img.shields.io/github/actions/workflow/status/xrdebug/xrdebug/test.yml?branch=2.0&style=flat-square)](https://github.com/xrdebug/xrdebug/actions)
 ![Code size](https://img.shields.io/github/languages/code-size/xrdebug/xrdebug?style=flat-square)
 [![Apache-2.0](https://img.shields.io/github/license/xrdebug/xrdebug?style=flat-square)](LICENSE)
-[![PHPStan](https://img.shields.io/badge/PHPStan-level%209-blueviolet?style=flat-square)](https://phpstan.org/)
-[![Mutation testing badge](https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fxrdebug%2Fxrdebug%2F2.0)](https://dashboard.stryker-mutator.io/reports/github.com/xrdebug/xrdebug/2.0)
-
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=xrdebug_xrdebug&metric=alert_status)](https://sonarcloud.io/dashboard?id=xrdebug_xrdebug)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=xrdebug_xrdebug&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=xrdebug_xrdebug)
-[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=xrdebug_xrdebug&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=xrdebug_xrdebug)
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=xrdebug_xrdebug&metric=security_rating)](https://sonarcloud.io/dashboard?id=xrdebug_xrdebug)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=xrdebug_xrdebug&metric=coverage)](https://sonarcloud.io/dashboard?id=xrdebug_xrdebug)
-[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=xrdebug_xrdebug&metric=sqale_index)](https://sonarcloud.io/dashboard?id=xrdebug_xrdebug)
-[![CodeFactor](https://www.codefactor.io/repository/github/xrdebug/xrdebug/badge)](https://www.codefactor.io/repository/github/xrdebug/xrdebug)
-
-[xrDebug](https://xrdebug.com/) is a lightweight web-based debug utility server. 🦄 [Play video](https://xrdebug.com/xrdebug.mp4)
 
 ## Installation
 
-Download latest xrdebug binary by running the following command in your terminal, it detects your operating system and CPU architecture:
+xrDebug is available for Windows, macOS, and Linux. Download the latest xrdebug binary from the [releases page](https://github.com/xrdebug/xrdebug/releases/latest).
+
+### From binary
+
+1. Go to the [releases page](https://github.com/xrdebug/xrdebug/releases/latest).
+2. Download the appropriate binary for your operating system.
+3. Extract the downloaded file.
+4. Move the binary to a directory included in your `PATH`.
+
+Optionally, you can run this command to install the latest version:
 
 ```sh
 bash <(curl -sL xrdebug.com/bin.sh)
 ```
 
-<p align="center">
-    <img alt="xrDebug light" src=".screen/xrdebug-1.1.0-splash-light.png">
-</p>
-<p>
-    <img alt="xrDebug dark" src=".screen/xrdebug-1.1.0-splash-dark.png">
-</p>
+### From source
+
+Ensure you have [Go](https://golang.org/dl/) installed.
+
+```sh
+go install github.com/xrdebug/xrdebug@latest
+```
+
+## Usage
+
+Run the server with the following command:
+
+```sh
+xrdebug <options>
+```
+
+See the [run documentation](https://docs.xrdebug.com/run) for options.
+
+### Options
+
+- `-a`: IP address to listen on (default: ``)
+- `-p`: Port to listen on (use `0` for random, default: `27420`)
+- `-c`: Path to TLS certificate file
+- `-z`: Path to TLS private key
+- `-e`: Enable end-to-end encryption (default: `false`)
+- `-k`: (for `-e` option) Path to symmetric key (AES-GCM AE)
+- `-s`: Enable sign verification (default: `false`)
+- `-x`: (for `-s` option) Path to private key (ed25519)
+- `-n`: Session name (default: `xrDebug`)
+- `-i`: Editor to use (default: `vscode`, options: `atom`, `bracket`, `emacs`, `espresso`, `fleet`, `idea`, `macvim`, `netbeans`, `nova`, `phpstorm`, `sublime`, `textmate`, `vscode`, `zed`)
+
+### Clients
+
+The following clients are available:
+
+- PHP client: [xrdebug/php](https://github.com/xrdebug/php)
+- WordPress plugin: [xrdebug/wordpress](https://github.com/xrdebug/wordpress)
+
+(Contributions for other clients are welcome!)
 
 ## Documentation
 
 Documentation available at [docs.xrdebug.com](https://docs.xrdebug.com/).
 
-## Features
+## System architecture
 
-* Ephemeral, it doesn't store any persistent data
-* Signed requests (Ed25519)
-* End-to-end encryption (AES-GCM AE)
-* Filter messages by Topics and Emotes
-* Resume, Pause, Stop and Clear debug window controls
-* Keyboard shortcuts (Resume **R**, Pause **P**, Stop **S** and Clear **C**)
-* Re-name "xrDebug" session to anything you want
-* Export dump output to clipboard or as PNG image
-* Pause and resume your code execution
-* Dark / Light mode follows your system preferences
-* Portable & HTML based (save page, search, etc.)
-* Uses [FiraCode](https://github.com/tonsky/FiraCode) font for displaying _beautiful looking dumps_ ™
-* Open with editor links
-* Responsive user interface
+xrDebug follows a modular architecture with the following key components:
 
-<p align="center">
-    <img alt="xrDebug light demo" src=".screen/xrdebug-1.1.0-demo-dark.png">
-</p>
+```mermaid
+graph TD
+    A[Client Application] -->|Debug Messages| B[xrDebug Server]
+    B -->|SSE| C[Web Browser]
+    B -->|Console Output| D[Terminal]
 
-<p align="center">
-    <img alt="xrDebug dark demo" src=".screen/xrdebug-1.1.0-demo-light.png">
-</p>
+    subgraph Server Components
+        B --> E[SSE Controller]
+        B --> F[Message Handler]
+        B --> G[Security Layer]
+    end
 
-## PHP Features
+    G -->|Optional| H[TLS Encryption]
+    G -->|Optional| I[Message Encryption]
+    G -->|Optional| J[Signature Verification]
+```
 
-* Configuration via code and `xr.php` file
-* Dump arguments using [VarDump](https://chevere.org/packages/var-dump.html)
-* Generates dump backtrace
-* Custom inspectors
-* Handle errors and exceptions (hook or replace your existing handler)
+### Core Components
+
+The system consists of these main components:
+
+1. **Server**
+   - Handles incoming debug messages
+   - Manages SSE connections
+   - Implements security measures
+   - Provides HTTP endpoints
+
+2. **Message Handler**
+   - Processes incoming debug data
+   - Sanitizes content
+   - Manages message queuing
+   - Handles message broadcasting
+
+3. **Security Layer**
+   - TLS encryption for HTTPS
+   - End-to-end message encryption
+   - Request signature verification
+
+4. **Client Interface**
+   - Real-time updates via SSE
+   - Message decryption
+   - Interactive debugging tools (pause, resume, stop)
+   - Editor integration (jump to file, line)
+
+### Data flow
+
+```mermaid
+sequenceDiagram
+    participant C as Client App
+    participant S as xrDebug Server
+    participant B as Browser/Terminal
+
+    C->>+S: Send Debug Message
+    Note over S: Sanitize & Process
+    S->>S: Apply Security Measures
+    S->>B: Broadcast via SSE
+    B->>B: Display Debug Info
+```
+
+## HTTP API
+
+To send a message to the server, make a POST request to the `/messages` endpoint. All parameters are optional: `body`, `emote`, `file_line`, `file_path`, `id`, `topic` (but at least one is required).
+
+```sh
+curl --fail -X POST \
+    --data "body=My message" \
+    --data "file_path=file" \
+    --data "file_line=1" \
+    http://localhost:27420/messages
+```
+
+Learn more about the [HTTP API](https://docs.xrdebug.com/api) at the documentation.
+
+## Signed requests
+
+Request signing using Ed25519 digital signatures to verify message authenticity. To use signed requests pass the `-s` flag to the server. Optionally, you can pass the private key using the `-x` flag.
+
+To sign a request, the client must include the `X-Signature` header. The signature is a base64 encoded string generated by signing the serialized post fields with the private key. If there's no fields sign an empty string.
+
+### Sign workflow
+
+To sign a request server expect the following data workflow:
+
+1. Sort the post fields by key
+2. Concatenate the key-value pairs
+3. Sign the concatenated string
+4. Base64 encode the signature at `X-Signature` header
+
+Example in PHP:
+
+```php
+function serialize(array $data): string
+{
+    $result = '';
+    ksort($data);
+    foreach ($data as $key => $value) {
+        $result .= $key . $value;
+    }
+
+    return $result;
+}
+
+$serialized = serialize($data);
+$signature = $privateKey->sign($serialized);
+$signHeader = base64_encode($signature);
+```
+
+Example in Python:
+
+```python
+def serialize(data: dict) -> str:
+    return ''.join(f'{k}{v}' for k, v in sorted(data.items()))
+
+serialized = serialize(data)
+signature = private_key.sign(serialized)
+signHeader = base64.b64encode(signature).decode()
+```
+
+The `X-Signature` header should contain the base64 encoded signature generated by the client.
+
+```sh
+curl --fail -X POST \
+    --data "body=My signed message" \
+    --data "file_path=file" \
+    --data "file_line=1" \
+    -H "X-Signature: <signHeader>" \
+    http://127.0.0.1:27420/messages
+```
+
+## End-to-End encryption
+
+End-to-end encryption between xrDebug server and the debugger client. To enable end-to-end encryption pass the `-e` flag. Optionally, you can pass the symmetric key using the `-k` flag.
+
+The SSE stream at `/stream` will be encrypted using the symmetric key. Decryption happens on the client-side (web browser).
 
 ## License
 
