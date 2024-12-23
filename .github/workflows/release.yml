@@ -34,8 +34,8 @@ jobs:
           allowUpdates: true
           omitBodyDuringUpdate: true
           artifacts: >
-            xrdebug-windows-*.tar.gz,
-            xrdebug-macos-*.tar.gz,
-            xrdebug-linux-*.tar.gz,
-            xrdebug-freebsd-*.tar.gz
+            dist/xrdebug-windows-*.tar.gz,
+            dist/xrdebug-macos-*.tar.gz,
+            dist/xrdebug-linux-*.tar.gz,
+            dist/xrdebug-freebsd-*.tar.gz
           token: ${{ secrets.GITHUB_TOKEN }}

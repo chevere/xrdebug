@@ -5,6 +5,8 @@ test-coverage:
 	mkdir -p coverage
 	gotestsum -- -v ./... -coverpkg=./... -coverprofile=coverage/coverage.out
 	go tool cover -html coverage/coverage.out -o coverage/coverage.html
+
+make open-coverage:
 	open coverage/coverage.html
 
 dev-deps:
