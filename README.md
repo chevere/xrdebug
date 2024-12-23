@@ -4,7 +4,7 @@
 
 <a href="https://github.com/xrdebug/xrdebug/releases/latest"><img alt="Get it on macOS" src="readme_assets/badge/macos.png" height="50" hspace="2"><img alt="Get it on Linux" src="readme_assets/badge/linux.png" height="50" hspace="2"><img alt="Get it on Windows" src="readme_assets/badge/windows.png" height="50" hspace="2"></a>
 
-<a href="https://xrdebug.com"><img alt="xrDebug" src="web/icon.svg" width="40%"></a>
+<a href="https://xrdebug.com"><img alt="xrDebug" src=".github/banner/xrdebug-social.png"></a>
 
 [![Build](https://img.shields.io/github/actions/workflow/status/xrdebug/xrdebug/test.yml?branch=2.0&style=flat-square)](https://github.com/xrdebug/xrdebug/actions)
 ![Code size](https://img.shields.io/github/languages/code-size/xrdebug/xrdebug?style=flat-square)
@@ -34,6 +34,13 @@ Ensure you have [Go](https://golang.org/dl/) installed.
 ```sh
 go install github.com/xrdebug/xrdebug@latest
 ```
+
+## Screens
+
+<img alt="xrDebug light" src="readme_assets/screens/xrdebug-1.1.0-splash-light.png">
+<img alt="xrDebug dark" src="readme_assets/screens/xrdebug-1.1.0-splash-dark.png">
+<img alt="xrDebug light demo" src="readme_assets/screens/xrdebug-1.1.0-demo-dark.png">
+<img alt="xrDebug dark demo" src="readme_assets/screens/xrdebug-1.1.0-demo-light.png">
 
 ## Usage
 
