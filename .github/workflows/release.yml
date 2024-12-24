@@ -1,16 +1,11 @@
 name: Release
 on:
-  workflow_run:
-    workflows: ["Test"]
-    types:
-      - completed
   push:
     tags:
       - "*"
 
 jobs:
   release:
-    if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -28,6 +23,9 @@ jobs:
       #     passphrase: ${{ secrets.GPG_PASSPHRASE }}
       # - name: Sign xrdebug.phar
       #   run: gpg -ab xrdebug.phar
+      - name: Test
+        run: |
+          make test
       - name: Cross build
         run: |
           make build-all
