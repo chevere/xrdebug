@@ -1,10 +1,7 @@
 name: Test
-on:
-  push:
-    tags:
-      - "*"
+on: [push]
 jobs:
-  release:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -16,6 +13,9 @@ jobs:
       - name: Deps
         run: |
           make dev-deps
+      - name: Vet
+        run: |
+          make vet
       - name: Tests
         run: |
           make test-coverage
