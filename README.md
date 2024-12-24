@@ -1,18 +1,18 @@
 # xrDebug
 
-[xrDebug](https://xrdebug.com/) is a lightweight web-based debug server. [Play video](https://xrdebug.com/xrdebug.mp4)
+[xrDebug](https://xrdebug.com/) is a lightweight web-based debug software. [Play video](https://xrdebug.com/xrdebug.mp4)
 
-<a href="https://github.com/xrdebug/xrdebug/releases/latest"><img alt="Get it on macOS" src="readme_assets/badge/macos.png" height="50" hspace="2"><img alt="Get it on Linux" src="readme_assets/badge/linux.png" height="50" hspace="2"><img alt="Get it on Windows" src="readme_assets/badge/windows.png" height="50" hspace="2"></a>
+<a href="https://github.com/xrdebug/xrdebug/releases/latest"><img alt="Get it on macOS" src="assets/badge/macos.png" height="50" hspace="2"><img alt="Get it on Linux" src="assets/badge/linux.png" height="50" hspace="2"><img alt="Get it on Windows" src="assets/badge/windows.png" height="50" hspace="2"><img alt="Get it on FreeBSD" src="assets/badge/freebsd.png" height="50" hspace="2"></a>
 
 <a href="https://xrdebug.com"><img alt="xrDebug" src=".github/banner/xrdebug-social.png"></a>
 
-[![Build](https://img.shields.io/github/actions/workflow/status/xrdebug/xrdebug/test.yml?branch=2.0&style=flat-square)](https://github.com/xrdebug/xrdebug/actions)
+[![Build](https://img.shields.io/github/actions/workflow/status/xrdebug/xrdebug/test.yml?branch=3.0&style=flat-square)](https://github.com/xrdebug/xrdebug/actions)
 ![Code size](https://img.shields.io/github/languages/code-size/xrdebug/xrdebug?style=flat-square)
 [![Apache-2.0](https://img.shields.io/github/license/xrdebug/xrdebug?style=flat-square)](LICENSE)
 
 ## Installation
 
-xrDebug is available for Windows, macOS, and Linux. Download the latest xrdebug binary from the [releases page](https://github.com/xrdebug/xrdebug/releases/latest).
+xrDebug is available for Windows, macOS, Linux and FreeBSD. Download the latest xrdebug binary from the [releases page](https://github.com/xrdebug/xrdebug/releases/latest).
 
 ### From binary
 
@@ -37,10 +37,10 @@ go install github.com/xrdebug/xrdebug@latest
 
 ## Screens
 
-<img alt="xrDebug light" src="readme_assets/screens/xrdebug-1.1.0-splash-light.png">
-<img alt="xrDebug dark" src="readme_assets/screens/xrdebug-1.1.0-splash-dark.png">
-<img alt="xrDebug light demo" src="readme_assets/screens/xrdebug-1.1.0-demo-dark.png">
-<img alt="xrDebug dark demo" src="readme_assets/screens/xrdebug-1.1.0-demo-light.png">
+<img alt="xrDebug light" src="assets/screens/xrdebug-1.1.0-splash-light.png">
+<img alt="xrDebug dark" src="assets/screens/xrdebug-1.1.0-splash-dark.png">
+<img alt="xrDebug light demo" src="assets/screens/xrdebug-1.1.0-demo-dark.png">
+<img alt="xrDebug dark demo" src="assets/screens/xrdebug-1.1.0-demo-light.png">
 
 ## Usage
 
