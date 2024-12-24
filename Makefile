@@ -2,18 +2,13 @@ vet:
 	go vet -v ./...
 
 test:
-	gotestsum -- -v ./...
+	go test -v ./...
 
 test-coverage:
-	mkdir -p coverage
-	gotestsum -- -v ./... -coverpkg=./... -coverprofile=coverage/coverage.out
-	go tool cover -html coverage/coverage.out -o coverage/coverage.html
+	go test -v ./... -coverprofile=coverage.out
 
 open-coverage:
-	open coverage/coverage.html
-
-dev-deps:
-	go install gotest.tools/gotestsum@latest
+	go tool cover -html=coverage.out
 
 .PHONY: build
 build:
