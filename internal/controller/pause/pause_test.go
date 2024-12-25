@@ -73,8 +73,8 @@ func TestPauseController(t *testing.T) {
 		}
 		w = httptest.NewRecorder()
 		controller.Post()(w, req)
-		if w.Code != http.StatusSeeOther {
-			t.Errorf("Expected status %d, got %d", http.StatusSeeOther, w.Code)
+		if w.Code != http.StatusConflict {
+			t.Errorf("Expected status %d, got %d", http.StatusConflict, w.Code)
 		}
 		controller.lockManager.Delete(lockID)
 	})
