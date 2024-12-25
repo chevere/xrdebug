@@ -11,6 +11,7 @@ package pause
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"github.com/xrdebug/xrdebug/internal/cli"
@@ -42,7 +43,7 @@ func (c *Controller) Post() http.HandlerFunc {
 		id := r.FormValue("id")
 		lock, err := c.lockManager.New(id)
 		if err != nil {
-			http.Error(w, "Unable to create lock", http.StatusSeeOther)
+			http.Error(w, err.Error(), http.StatusConflict)
 			return
 		}
 		msg := dump.New(
@@ -57,6 +58,7 @@ func (c *Controller) Post() http.HandlerFunc {
 		c.logger.Printf("Pause %s %s", r.RemoteAddr, msg.FileDisplay)
 		jsonMsg, _ := json.Marshal(msg)
 		c.messages <- string(jsonMsg)
+		w.Header().Set("Location", fmt.Sprintf("/pauses/%s", id))
 		w.WriteHeader(http.StatusCreated)
 		json.NewEncoder(w).Encode(lock)
 	}
@@ -69,7 +71,7 @@ func (c *Controller) Get() http.HandlerFunc {
 		id := r.PathValue("id")
 		lock, err := c.lockManager.Get(id)
 		if err != nil {
-			http.Error(w, "Lock not found", http.StatusNotFound)
+			http.Error(w, err.Error(), http.StatusNotFound)
 			return
 		}
 		json.NewEncoder(w).Encode(lock)
@@ -83,7 +85,7 @@ func (c *Controller) Patch() http.HandlerFunc {
 		id := r.PathValue("id")
 		lock, err := c.lockManager.Update(id)
 		if err != nil {
-			http.Error(w, "Failed to update lock", http.StatusNotFound)
+			http.Error(w, err.Error(), http.StatusNotFound)
 			return
 		}
 		c.logger.Printf("Stop %s", r.RemoteAddr)
@@ -97,7 +99,7 @@ func (c *Controller) Delete() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		id := r.PathValue("id")
 		if _, err := c.lockManager.Get(id); err != nil {
-			http.Error(w, "Lock not found", http.StatusNotFound)
+			http.Error(w, err.Error(), http.StatusNotFound)
 			return
 		}
 		c.lockManager.Delete(id)
