@@ -35,6 +35,16 @@ Ensure you have [Go](https://golang.org/dl/) installed.
 go install github.com/xrdebug/xrdebug@latest
 ```
 
+### Docker
+
+Container images are available at [ghcr.io/xrdebug/xrdebug](https://github.com/xrdebug/xrdebug/pkgs/container/xrdebug).
+
+Run the following command to start the server at port `27420`:
+
+```sh
+docker run -t --init --rm --pull=always -p 27420:27420 ghcr.io/xrdebug/xrdebug:latest
+```
+
 ## Screens
 
 <img alt="xrDebug light" src="assets/screens/xrdebug-1.1.0-splash-light.png">
@@ -50,7 +60,7 @@ Run the server with the following command:
 xrdebug <options>
 ```
 
-See the [run documentation](https://docs.xrdebug.com/run) for options.
+See the [run documentation](https://docs.xrdebug.com/run) for examples.
 
 ### Options
 
