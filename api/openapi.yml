@@ -1,0 +1,148 @@
+openapi: 3.1.0
+info:
+  title: xrDebug API
+  version: 3.0.0
+  description: API for xrDebug debugging server
+
+servers:
+  - url: http://localhost:27420
+    description: Local development server
+
+paths:
+  /:
+    get:
+      summary: Access web interface
+      description: Serves the web interface
+      responses:
+        "200":
+          description: HTML web interface
+
+  /messages:
+    post:
+      summary: Send a message
+      description: Sends a message to the server
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                body:
+                  type: string
+                  description: The message body
+                emote:
+                  type: string
+                  description: The message emote
+                file_line:
+                  type: integer
+                  description: The line number
+                file_path:
+                  type: string
+                  description: The file path
+                id:
+                  type: string
+                  description: The message ID
+                topic:
+                  type: string
+                  description: The message topic
+              minProperties: 1
+      responses:
+        "200":
+          description: Message sent
+        "400":
+          description: Invalid request
+
+  /pauses:
+    post:
+      summary: Create a pause lock
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  type: string
+                  description: The ID of the pause lock
+                body:
+                  type: string
+                  description: The message body
+                emote:
+                  type: string
+                  description: The message emote
+                file_line:
+                  type: integer
+                  description: The line number
+                file_path:
+                  type: string
+                  description: The file path
+                topic:
+                  type: string
+                  description: The message topic
+      responses:
+        "201":
+          description: Lock created
+          headers:
+            Location:
+              schema:
+                type: string
+                example: /pauses/{id}
+        "409":
+          description: Lock already exists
+
+  /pauses/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The ID of the pause lock
+
+    get:
+      summary: Get pause lock status
+      responses:
+        "200":
+          description: Returns the pause lock
+          content:
+            application/json:
+              schema:
+                type: object
+        "404":
+          description: Lock not found
+
+    delete:
+      summary: Delete pause lock
+      responses:
+        "204":
+          description: Lock deleted
+        "404":
+          description: Lock not found
+
+    patch:
+      summary: Update pause lock
+      description: Updates a pause lock status to stop true
+      responses:
+        "200":
+          description: Lock updated
+          content:
+            application/json:
+              schema:
+                type: object
+        "404":
+          description: Lock not found
+
+  /stream:
+    get:
+      summary: Establish SSE connection
+      description: Establishes a Server-Sent Events (SSE) connection
+      responses:
+        "200":
+          description: Returns the SSE stream
+          content:
+            text/event-stream:
+              schema:
+                type: string
