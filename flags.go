@@ -76,4 +76,10 @@ var flags = map[string]cli.Flag{
 		Default:     defaultEditor,
 		Description: fmt.Sprintf("Editor to use %v", editors),
 	},
+	"version": {
+		Variable:    "Version",
+		Type:        "bool",
+		Default:     false,
+		Description: "Show version information",
+	},
 }

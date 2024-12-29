@@ -36,6 +36,8 @@ type Options struct {
 	SessionName string
 	// Editor specifies the preferred text editor
 	Editor string
+	// Version specifies the `-version` flag to return the version
+	Version bool
 }
 
 // NewOptions creates a new Options instance from the provided flags configuration.
@@ -61,7 +63,7 @@ func NewOptions(flags map[string]Flag) (Options, error) {
 		}
 	}
 	if len(validationErrors) > 0 {
-		return Options{}, fmt.Errorf("validation errors: %v", validationErrors)
+		return Options{}, fmt.Errorf("%v", validationErrors)
 	}
 	flag.Parse()
 	return Options{
@@ -75,5 +77,6 @@ func NewOptions(flags map[string]Flag) (Options, error) {
 		SignPrivateKey:         *flagValues["SignPrivateKey"].(*string),
 		SessionName:            *flagValues["SessionName"].(*string),
 		Editor:                 *flagValues["Editor"].(*string),
+		Version:                *flagValues["Version"].(*bool),
 	}, nil
 }
