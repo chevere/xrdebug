@@ -47,7 +47,7 @@ docker run -t --init --rm --pull=always -p 27420:27420 ghcr.io/xrdebug/xrdebug:l
 
 ## Usage
 
-Run the server with the following command, once done the server is ready to process debug messages. Use a [client library](#client-libraries) to send messages to the server.
+Run the server with the following command. Use a [client library](#client-libraries) or the [HTTP API](#http-api) to send messages to the server.
 
 ```sh
 xrdebug <options>
