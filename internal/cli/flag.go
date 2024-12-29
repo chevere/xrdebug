@@ -51,7 +51,7 @@ func NewFlag(flag Flag) (*Flag, error) {
 			fmt.Sprintf("Invalid default value for `%s` flag", flag.Name))
 	}
 	if len(validationErrors) > 0 {
-		return nil, fmt.Errorf("validation errors: %v", validationErrors)
+		return nil, fmt.Errorf("NewFlag(): %v", validationErrors)
 	}
 	return &flag, nil
 }
