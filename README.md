@@ -45,16 +45,9 @@ Run the following command to start the server at port `27420`:
 docker run -t --init --rm --pull=always -p 27420:27420 ghcr.io/xrdebug/xrdebug:latest
 ```
 
-## Screens
-
-<img alt="xrDebug light" src="assets/screens/xrdebug-1.1.0-splash-light.png">
-<img alt="xrDebug dark" src="assets/screens/xrdebug-1.1.0-splash-dark.png">
-<img alt="xrDebug light demo" src="assets/screens/xrdebug-1.1.0-demo-dark.png">
-<img alt="xrDebug dark demo" src="assets/screens/xrdebug-1.1.0-demo-light.png">
-
 ## Usage
 
-Run the server with the following command:
+Run the server with the following command, once done the server is ready to process debug messages. Use a [client library](#client-libraries) to send messages to the server.
 
 ```sh
 xrdebug <options>
@@ -75,7 +68,7 @@ See the [run documentation](https://docs.xrdebug.com/run) for examples.
 - `-n`: Session name (default: `xrDebug`)
 - `-i`: Editor to use (default: `vscode`, options: `atom`, `bracket`, `emacs`, `espresso`, `fleet`, `idea`, `macvim`, `netbeans`, `nova`, `phpstorm`, `sublime`, `textmate`, `vscode`, `zed`)
 
-### Clients
+## Client libraries
 
 The following clients are available:
 
@@ -83,6 +76,13 @@ The following clients are available:
 - WordPress plugin: [xrdebug/wordpress](https://github.com/xrdebug/wordpress)
 
 (Contributions for other clients are welcome!)
+
+## Screens
+
+<img alt="xrDebug light" src="assets/screens/xrdebug-1.1.0-splash-light.png">
+<img alt="xrDebug dark" src="assets/screens/xrdebug-1.1.0-splash-dark.png">
+<img alt="xrDebug light demo" src="assets/screens/xrdebug-1.1.0-demo-dark.png">
+<img alt="xrDebug dark demo" src="assets/screens/xrdebug-1.1.0-demo-light.png">
 
 ## Documentation
 
