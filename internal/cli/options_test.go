@@ -39,6 +39,7 @@ func TestParseOptions(t *testing.T) {
 					"s": {Variable: "SymmetricKey", Type: "string", Default: "key"},
 					"v": {Variable: "EnableSignVerification", Type: "bool", Default: false},
 					"g": {Variable: "SignPrivateKey", Type: "string", Default: "sign_key"},
+					"version": {Variable: "Version", Type: "bool", Default: false},
 				},
 			},
 			expected: Options{
@@ -52,6 +53,7 @@ func TestParseOptions(t *testing.T) {
 				SymmetricKey:           "key",
 				EnableSignVerification: false,
 				SignPrivateKey:         "sign_key",
+				Version:				false,
 			},
 		},
 		{
