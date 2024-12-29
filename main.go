@@ -71,6 +71,10 @@ func run(deps *ServerDeps) error {
 	if err != nil {
 		return err
 	}
+	if options.Version {
+		fmt.Printf("%s %s\n", name, version)
+		os.Exit(0)
+	}
 	if err := validateEditor(options.Editor); err != nil {
 		return err
 	}
